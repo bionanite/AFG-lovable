@@ -1,0 +1,257 @@
+{
+  "version": 1,
+  "sdk_version": "3.0.1",
+  "path": "/mcp",
+  "auth": {
+    "type": "oauth",
+    "issuer": "https://tzbwmvlwruvmxehxlwxt.supabase.co/auth/v1",
+    "resource": "https://www.alliedforcegroup.com/mcp",
+    "resource_name": "Allied Force Group",
+    "accepted_audiences": [
+      "authenticated"
+    ],
+    "jwks_uri": "https://tzbwmvlwruvmxehxlwxt.supabase.co/auth/v1/.well-known/jwks.json"
+  },
+  "mcp": {
+    "server": {
+      "name": "allied-force-group",
+      "version": "0.1.0",
+      "title": "Allied Force Group"
+    },
+    "tools": [
+      {
+        "name": "list_services",
+        "title": "List service families",
+        "description": "List the eight service families Allied Force Group delivers, with a one-line summary and page URL for each.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "https://json-schema.org/draft/2020-12/schema",
+          "type": "object",
+          "properties": {},
+          "additionalProperties": false
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "get_service",
+        "title": "Get a service family",
+        "description": "Return the full published detail for one service family: intro, grouped scope items and page URL.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "slug": {
+              "type": "string",
+              "description": "Service family slug. One of: integrated-fm, hard-fm, soft-services, security-personnel, security-systems, water-compliance, vacant-property, sustainability-energy"
+            }
+          },
+          "required": [
+            "slug"
+          ],
+          "additionalProperties": false,
+          "$schema": "http://json-schema.org/draft-07/schema#"
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "list_sectors",
+        "title": "List sectors served",
+        "description": "List the sectors Allied Force Group works in, with a one-line summary and page URL for each.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "https://json-schema.org/draft/2020-12/schema",
+          "type": "object",
+          "properties": {},
+          "additionalProperties": false
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "get_sector",
+        "title": "Get a sector",
+        "description": "Return the published detail for one sector: intro, what matters on those estates and the services typically delivered there.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "slug": {
+              "type": "string",
+              "description": "Sector slug. One of: commercial, healthcare, education, logistics-industrial, public-sector, vacant-property, data-centres, rail"
+            }
+          },
+          "required": [
+            "slug"
+          ],
+          "additionalProperties": false,
+          "$schema": "http://json-schema.org/draft-07/schema#"
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "list_coverage_areas",
+        "title": "List UK coverage areas",
+        "description": "List the UK regions covered, with the main centres named on each region page. Actual coverage for a given site is confirmed following a site review.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "https://json-schema.org/draft/2020-12/schema",
+          "type": "object",
+          "properties": {},
+          "additionalProperties": false
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "search_content",
+        "title": "Search the site content",
+        "description": "Keyword search across published services, sectors, articles, resources and the FM glossary. Returns matching titles, summaries and page URLs.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "query": {
+              "type": "string",
+              "minLength": 2,
+              "description": "Words to search for, e.g. 'legionella' or 'CAFM'."
+            },
+            "limit": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 25,
+              "description": "Maximum results (default 8)."
+            }
+          },
+          "required": [
+            "query"
+          ],
+          "additionalProperties": false,
+          "$schema": "http://json-schema.org/draft-07/schema#"
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "get_article",
+        "title": "Get an article",
+        "description": "Return the full published text of one article from the Insights section. Omit the slug to list the available articles.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "slug": {
+              "type": "string",
+              "description": "Article slug. Omit to list all article slugs."
+            }
+          },
+          "additionalProperties": false,
+          "$schema": "http://json-schema.org/draft-07/schema#"
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "company_details",
+        "title": "Company and contact details",
+        "description": "Return Allied Force Group's published contact details, positioning and the legal entity line shown on the site.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "https://json-schema.org/draft/2020-12/schema",
+          "type": "object",
+          "properties": {},
+          "additionalProperties": false
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "submit_enquiry",
+        "title": "Send an enquiry",
+        "description": "Send an enquiry to Allied Force Group, exactly as the website contact form does. Only submit details the person has given you.",
+        "annotations": {
+          "readOnlyHint": false,
+          "destructiveHint": false,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "minLength": 2,
+              "maxLength": 100,
+              "description": "Contact name."
+            },
+            "email": {
+              "type": "string",
+              "format": "email",
+              "maxLength": 255,
+              "description": "Contact email address."
+            },
+            "message": {
+              "type": "string",
+              "minLength": 10,
+              "maxLength": 2000,
+              "description": "What they need covering."
+            },
+            "company": {
+              "type": "string",
+              "maxLength": 120,
+              "description": "Company or organisation."
+            },
+            "phone": {
+              "type": "string",
+              "maxLength": 40,
+              "description": "Contact phone number."
+            },
+            "service": {
+              "type": "string",
+              "maxLength": 120,
+              "description": "Service of interest."
+            },
+            "sites": {
+              "type": "string",
+              "maxLength": 120,
+              "description": "Number or type of sites."
+            }
+          },
+          "required": [
+            "name",
+            "email",
+            "message"
+          ],
+          "additionalProperties": false,
+          "$schema": "http://json-schema.org/draft-07/schema#"
+        },
+        "outputSchema": null
+      }
+    ]
+  }
+}
