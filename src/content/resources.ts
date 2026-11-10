@@ -21,7 +21,7 @@ export const resources: Resource[] = [
     summary:
       "The sequence of work that moves an estate from one provider to another without a gap in service.",
     intro:
-      "Mobilisation goes wrong in the same places every time: people, data and access. This checklist sets out what should be complete before the first day of service, in the order it is usually needed.",
+      "People, data and access need a clear handover before service starts. Use this checklist to agree responsibilities, records and the sequence of work for your estate.",
     sections: [
       {
         heading: "People",
@@ -121,7 +121,7 @@ export const resources: Resource[] = [
       {
         heading: "Routine entries",
         items: [
-          "Monthly hot and cold temperature checks at sentinel outlets",
+          "Hot and cold temperature checks at sentinel outlets at the frequencies set by the applicable written scheme",
           "Flushing records for little-used outlets",
           "Tank inspections and cleaning or chlorination records",
           "TMV servicing and failsafe checks",
@@ -139,7 +139,7 @@ export const resources: Resource[] = [
       },
     ],
     note:
-      "Scope, frequencies and who carries out specialist water work are confirmed following a site review.",
+      "Use HSE ACOP L8 and HSG274 alongside the site's competent risk assessment and written scheme. Applicable tasks, frequencies and responsibilities are site-specific; this guide is not a universal schedule. Scope and specialist delivery are confirmed following a site review.",
   },
   {
     slug: "security-handover-sheet",
@@ -149,7 +149,7 @@ export const resources: Resource[] = [
     summary:
       "What one shift should pass to the next so nothing is carried only in someone's head.",
     intro:
-      "Most security failures on an occupied site trace back to something known on one shift and not written down for the next. This is the minimum handover record.",
+      "A written shift handover helps the incoming team identify changes, incidents and unresolved items. Agree this record with your site's security scope and escalation arrangements.",
     sections: [
       {
         heading: "Site state",

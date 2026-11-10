@@ -6,13 +6,15 @@ import { Button } from "@/components/site/Button";
 import { getSector, sectors } from "@/content/sectors";
 import { getSectorDetail } from "@/content/sectorDetail";
 import { getSectorAnswer } from "@/content/sectorAnswers";
+import { sectorSearch } from "@/content/sectorSearch";
+import { getResource } from "@/content/resources";
 import { SectorDiagram } from "@/components/site/SectorDiagram";
 import { FaqSection } from "@/components/site/FaqSection";
 import { Breadcrumbs } from "@/components/site/Breadcrumbs";
 import { Reveal } from "@/components/site/Reveal";
 import { serviceFamilies } from "@/content/services";
-import { pageHead } from "@/lib/site";
-import { breadcrumbSchema, faqSchema, scriptTag } from "@/lib/schema";
+import { pageHead, absoluteUrl } from "@/lib/site";
+import { breadcrumbSchema, faqSchema, scriptTag, ORG_ID, WEBSITE_ID } from "@/lib/schema";
 
 export const Route = createFileRoute("/sectors/$slug")({
   loader: ({ params }) => {
@@ -32,20 +34,33 @@ export const Route = createFileRoute("/sectors/$slug")({
     const { sector } = loaderData;
     const path = `/sectors/${sector.slug}`;
     const detail = getSectorAnswer(sector.slug);
+    const search = sectorSearch[sector.slug];
     const schemas = [
+      {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "@id": `${absoluteUrl(path)}#webpage`,
+        url: absoluteUrl(path),
+        name: search?.heading ?? `${sector.name} facilities and security services`,
+        description: search?.description ?? sector.line,
+        inLanguage: "en-GB",
+        isPartOf: { "@id": WEBSITE_ID },
+        publisher: { "@id": ORG_ID },
+        about: sector.services.map((slug) => ({ "@type": "Service", url: absoluteUrl(`/services/${slug}`), provider: { "@id": ORG_ID } })),
+      },
       breadcrumbSchema([
         { name: "Home", path: "/" },
         { name: "Sectors", path: "/sectors" },
         { name: sector.name, path },
       ]),
     ];
-    if (detail) schemas.push(faqSchema(detail.faqs));
+    if (detail) schemas.push(faqSchema([...detail.faqs, ...(search?.questions ?? [])]));
 
     return {
       ...pageHead({
         path,
-        title: `${sector.name} facilities and security services | Allied Force Group`,
-        description: sector.line,
+        title: `${search?.heading ?? `${sector.name} facilities and security services`} | Allied Force Group`,
+        description: search?.description ?? sector.line,
       }),
       scripts: [scriptTag(schemas)],
     };
@@ -71,6 +86,8 @@ function SectorPage() {
   const { sector } = Route.useLoaderData();
   const detail = getSectorDetail(sector.slug);
   const answer = getSectorAnswer(sector.slug);
+  const search = sectorSearch[sector.slug];
+  const guides = (search?.resources ?? []).map(getResource).filter((resource) => resource !== undefined);
   const others = sectors.filter((s) => s.slug !== sector.slug);
   const related = sector.services
     .map((slug) => serviceFamilies.find((f) => f.slug === slug))
@@ -94,7 +111,7 @@ function SectorPage() {
           {sector.number} / Sector
         </div>
         <h1 className="mt-3 max-w-[18ch] text-4xl font-bold leading-[1.05] sm:text-5xl lg:text-6xl">
-          {sector.name} facilities and security services
+          {search?.heading ?? `${sector.name} facilities and security services`}
         </h1>
         {answer ? (
           <p className="mt-5 max-w-[62ch] text-base font-medium leading-relaxed text-foreground/90">
@@ -117,6 +134,23 @@ function SectorPage() {
           </a>
         </div>
       </VideoHero>
+
+      {search ? (
+        <section className="border-b border-hairline">
+          <div className="mx-auto grid max-w-[80rem] gap-10 px-6 py-16 lg:grid-cols-2">
+            <div>
+              <h2 className="text-2xl font-semibold">Scope and responsibilities</h2>
+              <p className="mt-4 max-w-[64ch] text-sm leading-relaxed text-muted-foreground">{search.scope}</p>
+            </div>
+            <div>
+              <h2 className="text-2xl font-semibold">What to prepare for a site review</h2>
+              <ul className="mt-4 list-disc space-y-3 pl-5 text-sm leading-relaxed text-muted-foreground">
+                {search.prepare.map((item) => <li key={item}>{item}</li>)}
+              </ul>
+            </div>
+          </div>
+        </section>
+      ) : null}
 
 
       <section className="mx-auto max-w-[80rem] px-6 py-20">
@@ -218,10 +252,31 @@ function SectorPage() {
 
       {answer ? (
         <FaqSection
-          faqs={answer.faqs}
+          faqs={[...answer.faqs, ...(search?.questions ?? [])]}
           heading={`${sector.name} facilities questions`}
         />
       ) : null}
+
+      <section className="mx-auto max-w-[80rem] px-6 py-16">
+        <h2 className="text-2xl font-semibold">Planning resources for {sector.name.toLowerCase()} estates</h2>
+        <div className="mt-6 grid gap-4 md:grid-cols-3">
+          {guides.map((guide) => (
+            <Link key={guide.slug} to="/resources/$slug" params={{ slug: guide.slug }} className="panel p-6 transition-colors hover:border-signal">
+              <h3 className="font-semibold">{guide.title}</h3>
+              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{guide.summary}</p>
+            </Link>
+          ))}
+        </div>
+        <Link to="/resources/fm-glossary" className="mt-6 inline-block text-sm text-signal underline underline-offset-4">Facilities management glossary: CAFM, PPM, SFG20 and RAMS</Link>
+        {search?.sources?.length ? (
+          <div className="mt-8 border-t border-hairline pt-6">
+            <h3 className="text-sm font-semibold">Further guidance</h3>
+            <ul className="mt-3 space-y-2 text-sm text-muted-foreground">
+              {search.sources.map((source) => <li key={source.url}><a href={source.url} className="underline underline-offset-4">{source.label}</a></li>)}
+            </ul>
+          </div>
+        ) : null}
+      </section>
 
       <section className="deep-gradient">
         <div className="mx-auto flex max-w-[80rem] flex-col gap-6 px-6 py-16 lg:flex-row lg:items-center lg:justify-between">

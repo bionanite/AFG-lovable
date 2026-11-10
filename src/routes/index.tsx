@@ -43,10 +43,10 @@ export const Route = createFileRoute("/")({
         name: "twitter:image",
         content: "https://www.alliedforcegroup.com/afg-share.jpg",
       },
-      { property: "og:url", content: "https://www.alliedforcegroup.com/" },
+      { property: "og:url", content: "https://alliedforcegroup.com/" },
     ],
     links: [
-      { rel: "canonical", href: "https://www.alliedforcegroup.com/" },
+      { rel: "canonical", href: "https://alliedforcegroup.com/" },
       { rel: "preload", as: "image", href: heroEstate, fetchPriority: "high" },
     ],
   }),

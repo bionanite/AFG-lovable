@@ -271,7 +271,7 @@ export const sectorDetail: Record<string, SectorDetail> = {
     ],
     detail: [
       {
-        heading: "Nothing happens without a permit",
+        heading: "Site-controlled access and work",
         body: "Inductions, escorting, RAMS and permit-to-work requirements are agreed in writing before anyone attends, and the same rules apply to every member of our supply chain.",
       },
       {
@@ -315,7 +315,7 @@ export const sectorDetail: Record<string, SectorDetail> = {
       },
       {
         heading: "Access agreed in advance",
-        body: "Inductions, competencies and site access requirements are agreed with your team before attendance, and recorded for each person who attends.",
+        body: "Inductions, competencies, sponsorship and site access requirements depend on the infrastructure and task. Applicable requirements are agreed with your team before attendance and recorded for each person; no single qualification is assumed to cover every rail activity.",
       },
       {
         heading: "Presentation and safety together",

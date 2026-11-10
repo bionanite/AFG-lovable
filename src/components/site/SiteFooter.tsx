@@ -134,6 +134,9 @@ export function SiteFooter() {
                 <div className="font-semibold text-foreground">
                   {office.city}
                 </div>
+                {office.slug === "london" && (
+                  <div className="mt-0.5 text-[13px] text-muted-foreground">{office.role}</div>
+                )}
                 <div className="mt-0.5 text-[13px] leading-relaxed text-muted-foreground">
                   {office.addressLines[0]}, {office.postalCode}
                 </div>

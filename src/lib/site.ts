@@ -4,7 +4,7 @@
  * footer, JSON-LD, llms.txt.
  */
 export const SITE = {
-  origin: "https://www.alliedforcegroup.com",
+  origin: "https://alliedforcegroup.com",
   name: "Allied Force Group",
   legalName: "Allied Force Group Ltd",
   locale: "en_GB",
@@ -47,7 +47,7 @@ export function pageHead({
   noindex,
 }: HeadInput): { meta: MetaEntry[]; links: MetaEntry[] } {
   const url = absoluteUrl(path);
-  const shareImage = image ?? SITE.shareImage;
+  const shareImage = image?.startsWith("https://") ? image : undefined;
 
   const meta: MetaEntry[] = [
     { title },
@@ -58,12 +58,15 @@ export function pageHead({
     { property: "og:url", content: url },
     { property: "og:site_name", content: SITE.name },
     { property: "og:locale", content: SITE.locale },
-    { property: "og:image", content: shareImage },
     { name: "twitter:card", content: "summary_large_image" },
     { name: "twitter:title", content: title },
     { name: "twitter:description", content: description },
-    { name: "twitter:image", content: shareImage },
   ];
+
+  if (shareImage) meta.push(
+    { property: "og:image", content: shareImage },
+    { name: "twitter:image", content: shareImage },
+  );
 
   if (noindex) meta.push({ name: "robots", content: "noindex, follow" });
 

@@ -5,6 +5,7 @@ import { SiteLayout } from "@/components/site/SiteLayout";
 import { PageHero } from "@/components/site/PageHero";
 import { Button } from "@/components/site/Button";
 import { submitEnquiry } from "@/lib/enquiries.functions";
+import { locations } from "@/content/locations";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
@@ -40,6 +41,8 @@ const prepare = [
   "Timescales you are working to",
   "Access or clearance requirements on site",
 ];
+
+const tradingOffice = locations.find((office) => office.slug === "london");
 
 type Errors = Partial<Record<string, string>>;
 
@@ -237,6 +240,15 @@ function ContactPage() {
               ))}
             </ul>
           </div>
+          {tradingOffice && (
+            <div className="panel p-7">
+              <span className="eyebrow">Trading address</span>
+              <address className="mt-3 not-italic text-sm leading-relaxed text-muted-foreground">
+                {tradingOffice.addressLines.map((line) => <div key={line}>{line}</div>)}
+                <div>{tradingOffice.postalCode}</div>
+              </address>
+            </div>
+          )}
         </div>
       </section>
     </SiteLayout>

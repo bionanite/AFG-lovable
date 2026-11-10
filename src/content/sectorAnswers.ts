@@ -145,7 +145,7 @@ export const sectorAnswers: Record<string, SectorAnswer> = {
       {
         question: "Does an empty building still need water compliance?",
         answer:
-          "Yes. Low-use and empty systems remain a Legionella risk, so flushing and temperature monitoring continue under the site's written scheme of control while the building is void.",
+          "An empty building can still present water-system risks. The dutyholder's risk assessment and written scheme determine applicable controls, which may include managing little-used outlets and monitoring. Tasks and frequencies are site-specific rather than identical for every vacant system.",
       },
       {
         question: "How is the building kept secure?",

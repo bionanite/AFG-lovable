@@ -2,6 +2,8 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/site/SiteLayout";
 import { Button } from "@/components/site/Button";
 import { getResource, resources } from "@/content/resources";
+import { sectors } from "@/content/sectors";
+import { sectorSearch } from "@/content/sectorSearch";
 
 import { pageHead } from "@/lib/site";
 import { breadcrumbSchema, scriptTag } from "@/lib/schema";
@@ -62,6 +64,7 @@ function ResourceNotFound() {
 function ResourcePage() {
   const { resource } = Route.useLoaderData();
   const others = resources.filter((r) => r.slug !== resource.slug);
+  const relatedSectors = sectors.filter((sector) => sectorSearch[sector.slug]?.resources.includes(resource.slug));
 
   return (
     <SiteLayout>
@@ -114,6 +117,12 @@ function ResourcePage() {
 
       <section className="wash-gradient border-y border-hairline">
         <div className="mx-auto max-w-[80rem] px-6 py-16">
+          <h2 className="text-xl font-semibold">Relevant sectors</h2>
+          <div className="mt-5 mb-10 flex flex-wrap gap-2.5">
+            {relatedSectors.map((sector) => (
+              <Link key={sector.slug} to="/sectors/$slug" params={{ slug: sector.slug }} className="panel px-4 py-2.5 text-sm font-medium transition-colors hover:border-signal">{sector.name}</Link>
+            ))}
+          </div>
           <span className="eyebrow">More resources</span>
           <div className="mt-6 flex flex-wrap gap-2.5">
             {others.map((r) => (

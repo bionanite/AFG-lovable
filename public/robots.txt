@@ -54,4 +54,4 @@ Allow: /
 User-agent: facebookexternalhit
 Allow: /
 
-Sitemap: https://www.alliedforcegroup.com/sitemap.xml
+Sitemap: https://alliedforcegroup.com/sitemap.xml

@@ -1,5 +1,18 @@
 # Allied Force Group site update
 
+## Sector SEO, GEO and AI-search planning
+- [x] Review current search foundations and all eight sector pages
+- [x] Align sitemap origin and crawler sitemap reference with the primary domain
+- [x] Confirm the existing English language declaration
+- [x] Prepare the sector-by-sector optimisation plan for approval
+- [x] Research UK search demand and read Google sector performance/indexed versions
+- [x] Improve all eight sector titles, descriptions, scope, buyer questions and preparation lists
+- [x] Link existing planning guides both ways and add sector/provider structured relationships
+- [x] Validate sector server HTML, mobile/desktop layout, guide navigation and enquiry navigation
+- [ ] Publish sector improvements — awaiting publication approval
+- [ ] Add real reviewers, case-study evidence and credentials — owner to supply
+- [ ] Compare search performance after publication — requires a later measurement period
+
 - [x] Enquiries table in Lovable Cloud
 - [x] Remove data centre / rail lead specialisms sitewide
 - [x] /sectors page (six sectors), /specialisms redirect, nav + footer
